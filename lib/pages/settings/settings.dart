@@ -21,7 +21,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  bool _isToggled = false;
+  // bool _isToggled = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

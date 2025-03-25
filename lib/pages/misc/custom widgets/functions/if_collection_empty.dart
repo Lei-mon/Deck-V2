@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 class IfCollectionEmpty extends StatelessWidget {
   final String ifCollectionEmptyText;
   final String? ifCollectionEmptySubText;
-  final double ifCollectionEmptyHeight;
+  final double? ifCollectionEmptyHeight;
   final bool hasIcon;
 
   const IfCollectionEmpty(
@@ -19,23 +19,24 @@ class IfCollectionEmpty extends StatelessWidget {
         required this.ifCollectionEmptyText,
         this.hasIcon = true,
         this.ifCollectionEmptySubText,
-        required this.ifCollectionEmptyHeight});
+        this.ifCollectionEmptyHeight});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: ifCollectionEmptyHeight,
-      child: Center(
-          child:
-          // Container(
-          //     height: MediaQuery.of(context).size.width,
-          //     width: MediaQuery.of(context).size.width - 100, // dunno what size
-          //     decoration: BoxDecoration(
-          //       shape: BoxShape.circle,
-          //       color: Colors.pinkAccent
-          //     ),
-          //     child:
-          Column(
+    return
+      IntrinsicHeight(
+        child: Container(
+          decoration: BoxDecoration(
+            color:DeckColors.white,
+
+            border: Border.all(
+              color: DeckColors.primaryColor,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(16),
+          ),
+            padding: const EdgeInsets.all(15),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -52,6 +53,7 @@ class IfCollectionEmpty extends StatelessWidget {
               Text(
                 ifCollectionEmptyText,
                 style: const TextStyle(
+                  height:1,
                   fontFamily: 'Fraiche',
                   fontSize: 30,
                   color: DeckColors.primaryColor,
@@ -71,8 +73,11 @@ class IfCollectionEmpty extends StatelessWidget {
               ),
             ],
           )
-        // )
-      ),
-    );
+        ),
+      );
+    //   SizedBox(
+    //   height: ifCollectionEmptyHeight,
+    //   child:
+    // );
   }
 }

@@ -13,6 +13,7 @@ import '../../backend/flashcard/flashcard_service.dart';
 import '../../backend/models/deck.dart';
 import '../../backend/task/task_provider.dart';
 import '../flashcard/flashcard.dart';
+import '../task/main_task.dart';
 import '../misc/custom widgets/functions/if_collection_empty.dart';
 import '../misc/custom widgets/tiles/deck_task_tile.dart';
 import '../misc/custom widgets/tiles/home_task_tile.dart';
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
       List<Deck> decks = await _flashcardService
           .getDecksByUserIdNewestFirst(userId); // Call method to fetch decks
       setState(() {
-        _decks = decks; // Update state with fetched decks
+        // _decks = decks; // Update state with fetched decks
       });
     }
   }
@@ -259,7 +260,6 @@ class _HomePageState extends State<HomePage> {
                                   const AutoSizeText(
                                     "You had a score of",
                                     textAlign: TextAlign.center,
-                                    minFontSize: 7,
                                     maxLines: 1,
                                     style: TextStyle(
                                       height:1,
@@ -285,7 +285,6 @@ class _HomePageState extends State<HomePage> {
                                   const AutoSizeText(
                                     "on your previous quiz.",
                                     textAlign: TextAlign.center,
-                                    minFontSize: 7,
                                     maxLines: 1,
                                     style: TextStyle(
                                       height:1,
@@ -362,8 +361,8 @@ class _HomePageState extends State<HomePage> {
                             )
                             ,),
                           SizedBox(width: 20),
-                          Expanded(child:
-                          Container(
+                          Expanded(
+                              child: Container(
                             padding: EdgeInsets.all(15),
                             height: 120,
                             decoration: BoxDecoration(
@@ -390,7 +389,6 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Title Text
                                 const AutoSizeText(
                                   "Spark Your Interest\nwith Fun Quizzes!",
                                   maxLines:2,
@@ -423,7 +421,6 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   child: const AutoSizeText("Search for Decks",
                                       maxLines: 1,
-                                      minFontSize: 7,
                                       style: TextStyle(
                                           fontFamily: 'Nunito-SemiBold',
                                           fontSize: 15,
@@ -433,12 +430,10 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                          ))
+                          )
+                          )
                         ]
                     ),
-                  //   IntrinsicHeight(
-                  //   child:
-                  // ),
                     const SizedBox(height: 10),
                     //upcoming deadline section
                     const SizedBox(height: 10),
@@ -458,8 +453,37 @@ class _HomePageState extends State<HomePage> {
                     //     'Now’s the perfect time to get ahead. Start adding new tasks and stay on top of your game!',
                     //   )
                     // else if (taskToday.isNotEmpty)
-                      HomeTaskTile(folderName: 'archorg', taskName: 'make a circuit board', deadline: getDeadline(selectedDay), onPressed: () {  },),
-
+                    HomeTaskTile(folderName: 'archorg', taskName: 'make a circuit board', deadline: getDeadline(selectedDay), onPressed: () {  }, priority: 0,),
+                    HomeTaskTile(folderName: 'hello', taskName: 'exam in quizalize', deadline: getDeadline(selectedDay), onPressed: () {  }, priority: 0,),
+                    HomeTaskTile(folderName: 'softeng', taskName: 'nyehehe', deadline: getDeadline(selectedDay), onPressed: () {  }, priority: 0,),
+                    Expanded(
+                      child:ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskPage(),
+                            )
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: DeckColors.white,
+                        foregroundColor: DeckColors.primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      ),
+                      child: const AutoSizeText("See more",
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontFamily: 'Nunito-SemiBold',
+                              fontSize: 15,
+                              color: DeckColors.primaryColor,
+                              fontWeight: FontWeight.bold)
+                      ),
+                    ),
+                    ),
                     //   SliverList(
                     //   delegate: SliverChildBuilderDelegate(childCount: _tasks.length.clamp(0, 5),
                     //       (context, index) {
@@ -534,10 +558,10 @@ class _HomePageState extends State<HomePage> {
                     ),],
                 ),
               ),
-
             ]
-        ),
-      )),
+            ),
+          )
+      ),
       // SafeArea(
       //     top: true,
       //     bottom: false,
